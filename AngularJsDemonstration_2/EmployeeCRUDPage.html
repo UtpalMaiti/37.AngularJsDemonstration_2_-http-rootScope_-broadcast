@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html ng-app="employeeApp">
+<head>
+	<title></title>
+	<meta charset="utf-8" />
+	<script src="Scripts/angular.js"></script>
+	<script src="Scripts/employeeAppScripts.js"></script>
+</head>
+<body >
+	<div ng-controller="employeeCtrl">
+		<h2>Employee List...</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Location</th>
+					<th>Salary</th>
+					<th>Dept Id</th>
+					<th>Action(s)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="emp in employeeList">
+					<td>{{emp.Id}}</td>
+					<td>{{emp.Name}}</td>
+					<td>{{emp.Location}}</td>
+					<td>{{emp.Salary}}</td>
+					<td>{{emp.DeptId}}</td>
+					<td>
+						<button ng-click="onEdit(emp.Id)">Edit</button>
+						<button ng-click="onDelete(emp.Id)">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>
+			{{resultMessage}}
+		</p>
+		<div ng-show="isEdit">
+			<h2>Employee Details...</h2>
+			<p>
+				<label>Name : <input type="text" ng-model="employee.Name" /></label>
+			</p>
+			<p>
+				<label>Location : <input type="text" ng-model="employee.Location" /></label>
+			</p>
+			<p>
+				<label>Salary : <input type="text" ng-model="employee.Salary" /></label>
+			</p>
+			<p>
+				<label>Dept Id : <input type="text" ng-model="employee.DeptId" /></label>
+			</p>
+			<button ng-disabled="!isEmployeeDataChanged" ng-click="onEmployeeUpdate()">Update</button>
+		</div>
+	</div>
+	<p></p>
+	<div ng-controller="demoController">
+		<h2>We are in Second Controller...</h2>
+		<p style="font-weight:bold">
+			{{testMessage}}
+		</p>
+	</div>
+</body>
+</html>

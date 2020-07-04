@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Modal</title>
+    <script>
+        var buttons = document.querySelectorAll('button');
+        var modal = document.querySelector('.modal');
+        var backdrop = document.querySelector('.backdrop');
+
+        var outputParagraph = document.querySelector('#quote');
+        var textEdit = document.querySelector('.modal textarea');
+
+        var quote = 'A Modal Component on a Webpage - how hard could it be?';
+        var editedQuote = '';
+
+        function updateParagraph() {
+            outputParagraph.textContent = quote;
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            backdrop.style.display = 'none';
+        }
+
+        updateParagraph();
+
+        buttons[2].addEventListener('click', function () {
+            modal.style.display = 'block';
+            backdrop.style.display = 'block';
+            editedQuote = quote;
+            textEdit.value = quote;
+        });
+
+        buttons[0].addEventListener('click', closeModal);
+        backdrop.addEventListener('click', closeModal);
+
+        buttons[1].addEventListener('click', function () {
+            closeModal();
+            if (editedQuote.trim().length > 0) {
+                quote = editedQuote;
+                updateParagraph();
+            }
+        });
+
+        textEdit.addEventListener('input', function () {
+            editedQuote = textEdit.value;
+        });
+    </script>
+    <style>
+
+        /* General Styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        /* Container for Modal Control + Modal Control */
+
+        .demo-container {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-control {
+            padding: 1rem;
+            border: 1px solid #521751;
+            text-align: center;
+        }
+
+        button {
+            font: inherit;
+            background: transparent;
+            border: 2px solid #521751;
+            padding: 0.5rem 1rem;
+            color: #521751;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+            button:hover,
+            button:active {
+                border-color: #fa923f;
+                color: #fa923f;
+            }
+
+        /* The Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            top: 40%;
+            left: 40%;
+            width: 20%;
+            background: white;
+            box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+        }
+
+            .modal h1 {
+                color: #521751;
+                margin: 0.5rem 0;
+                font-size: 1.2rem;
+            }
+
+        .modal-input {
+            margin: 0.5rem 0;
+        }
+
+            .modal-input textarea {
+                width: 100%;
+                font: inherit;
+                resize: none;
+            }
+
+                .modal-input textarea:focus {
+                    outline: none;
+                    background: #ffdbfe;
+                    border-color: #521751;
+                }
+
+        .modal-actions {
+            text-align: right;
+        }
+
+        button.btn-cancel {
+            border-color: red;
+            color: red;
+        }
+
+            button.btn-cancel:hover,
+            button.btn-cancel:active {
+                color: white;
+                background: red;
+            }
+
+        button.btn-confirm {
+            border-color: green;
+            color: green;
+        }
+
+            button.btn-confirm:hover,
+            button.btn-confirm:active {
+                color: white;
+                background: green;
+            }
+
+        .backdrop {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+
+        .open {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="backdrop"></div>
+    <div class="modal">
+        <h1>Edit your Statement</h1>
+        <div class="modal-input">
+            <textarea rows="3"></textarea>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="btn-cancel">Cancel</button>
+            <button type="button" class="btn-confirm">Confirm</button>
+        </div>
+    </div>
+    <div class="demo-container">
+        <div class="modal-control">
+            <p id="quote"></p>
+            <button type="button">Edit Value</button>
+        </div>
+    </div>
+</body>
+</html>
